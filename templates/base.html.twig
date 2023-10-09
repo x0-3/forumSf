@@ -2,16 +2,82 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <meta name="description" content="{{description}}">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <script src="https://kit.fontawesome.com/adba52364d.js" crossorigin="anonymous"></script>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
 
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <a href="{{path('app_home')}}">
+                <figure>
+                    <img src="{{asset('img/logo.png')}}" alt="logo">
+                </figure>
+            </a>
+
+            {% if app.user == null %}
+
+                <nav>
+                    <ul>
+                        <li><a href="{{path('app_home')}}" class="fa-solid fa-house"></a></li>
+                        <li><a href="#" class="fa-solid fa-puzzle-piece"></a></li>
+                        <li><a href="{{path('app_login')}}" class="fa-solid fa-user-plus"></a></li>
+                    </ul>
+                </nav>
+
+                <div class="account">
+                    <ul>
+                        <li><a href="#"><i class="fa-solid fa-gear"></i></a></li>
+                    </ul>
+                </div>
+
+                {% else %}
+
+                    <nav>
+                        <ul>
+                            <li><a href="{{path('app_home')}}" class="fa-solid fa-house"></a></li>
+                            <li><a href="#" class="fa-solid fa-puzzle-piece"></a></li>
+                            <li><a href="{{path('app_logout')}}" class="fa-solid fa-arrow-right-from-bracket"></a></li>
+                        </ul>
+                    </nav>
+        
+                    <div class="account">
+                        <ul>
+                            <li><a href="#"><i class="fa-solid fa-gear"></i></a></li>
+                            <li>
+                                <a href="">
+                                    <figure>
+                                        <img src="" alt="account avatar">
+        
+                                    </figure>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+            {% endif %}
+
+        </header>
+
+        <main>
+
+            {% block body %}{% endblock %}
+        </main>
+
+
+        <footer>
+            <ul>
+                <li><a href="#">Legal</a></li>
+                <li><a href="#">Privacy policy</a></li>
+                <li><a href="#">Term of service</a></li>
+                <li><a href="#">Contact us</a></li>
+            </ul>
+        </footer>
     </body>
 
     {% block javascripts %}
