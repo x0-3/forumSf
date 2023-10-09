@@ -7,8 +7,6 @@
 {# TODO: add search bar #}
 
 {% if topics %}
-    
-    {{ dump(topics) }}
 
     <section class="posts">
 
@@ -16,22 +14,31 @@
             
             <article>
                 <div class="authorInfo">
-                    <figure>
-                        <img src="" alt="avatar">
 
-                    </figure>
+                    {% if topic.user.avatar == null %}
+
+                        <figure>
+                            <img src="{{ asset('img/defaultProfilePicture.jpg') }}" alt="default profile picture">
+                        </figure>
+
+                    {% else %}
+
+                        <figure>
+                            <img src="{{ asset('uploads/' ~ topic.user.avatar) }}" alt="{{topic.user.username}} profile picture">
+                        </figure>
+                    {% endif %}
 
                     <a href="">
-                        <p>{{topic.user.username}}</p>
+                        <p>{{ topic.user.username }}</p>
 
                     </a>
                 </div>
 
-                <p>{{ topic.createdAt |date("m/d/Y")}} </p>
+                <p>{{ topic.createdAt |date("m/d/Y") }} </p>
 
                 <a href="">
 
-                    <p>{{ topic.title}} </p>
+                    <p>{{ topic.title }} </p>
                 </a>
 
 
