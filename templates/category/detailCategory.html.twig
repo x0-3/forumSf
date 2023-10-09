@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{category.name}} {% endblock %}
+
+{% block body %}
+
+<section class="topic">
+
+    {# TODO: searchbar #}
+    {# <form action="index.php?ctrl=home&action=searchBar" method="post" class="searchBar">
+        <input type="search" name="search" id="search" placeholder="Search a topic ..." autocomplete="on">
+
+        <input type="submit" id="submitButton" name="submit" value="&#x1F50E;&#xFE0E;">
+    </form> #}
+
+    <div class="categoryName">
+        <h1>{{category.name}}</h1>
+        <a href="{{path('detail_category', {'id': category.id})}}" class="fa-solid fa-plus"></a>
+    </div>
+    
+
+    {% if category.topics %}
+        
+        {% for topic in category.topics %}
+            
+            <div class="posts">
+                
+                <article>
+                    <div class="authorInfo">
+                        
+                        {% if topic.user.avatar %}
+                            
+                            <figure>
+                                <img src="{{asset('uploads/' ~ topic.user.avatar)}}" alt="avatar">
+                                
+                            </figure>
+                        {% else %}
+
+                            <figure>
+                                <img src="{{asset('img/defaultProfilePicture.jpg')}}" alt="avatar">
+                                
+                            </figure>
+                        {% endif %}
+            
+                        <a href="">
+                            <p>{{topic.user.username}}</p>
+                            
+                        </a>
+                    </div>
+            
+                    <p>{{topic.createdAt |date("m/d/Y")}}</p>
+            
+                    <a href="{{path('detail_topic', {'id': topic.id})}}">
+                        <p>{{topic.title}}</p>
+                    </a>
+            
+                </article>
+            
+            </div>
+                
+        {% endfor %}
+
+    {% else %}
+    
+        <h3>there is no topic for this section</h3>
+    {% endif %}
+
+</section>
+{% endblock %}

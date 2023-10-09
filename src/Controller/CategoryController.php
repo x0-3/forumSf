@@ -21,4 +21,16 @@ class CategoryController extends AbstractController
             'description' => 'CategoryController',
         ]);
     }
+
+    #[Route('/category/{id}', name: 'detail_category')]
+    public function detailCategory(Category $category): Response
+    {
+
+        // dd($category);
+
+        return $this->render('category/detailCategory.html.twig', [
+            'category' => $category,
+            'description' => 'CategoryController',
+        ]);
+    }
 }
