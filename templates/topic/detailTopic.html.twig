@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TopicController!{% endblock %}
+
+{% block body %}
+
+{% if topic %}
+        
+    <section class="posts">
+        <article>
+
+            <div class="topicHeader">
+
+                <div class="authorInfo">
+
+                    {% if topic.user.avatar == null %}
+
+                        <figure>
+                            <img src="{{asset('img/defaultProfilePicture.jpg')}}" alt="avatar">
+
+                        </figure>
+                    
+                    {% else %}
+
+                        <figure>
+                            <img src="{{asset('uploads/' ~ topic.user.avatar)}}" alt="avatar">
+
+                        </figure>
+                    {% endif %}
+                    
+
+                    <a href="">
+                        <p>{{ topic.user.username}}</p>
+                    </a>
+
+                </div>
+
+                <a href="">
+                    <i class="fa-solid fa-trash" style="color: #b20101;"></i>
+                </a>
+
+                {# TODO: Lock functionnality #}
+                {# <form action="" method="post" class="lock">
+                    
+                    <button type="submit">{{topic.islocked}}</button>        
+                </form> #}
+            </div>
+
+            <p>{{topic.createdAt |date("m/d/Y")}}</p>
+
+            <a href="{{path('detail_topic', {'id': topic.id})}}">
+                <p>{{topic.title}}</p>
+            </a>
+
+            {# TODO: Like functionnality #}
+            {# <form action="index.php?ctrl=forum&action=like&id=<?= $topic->getId() ?>" method="post">
+
+                <button id="submit" type="submit">
+                    <i class="fa-regular fa-thumbs-up"></i>
+                    <p><?= $like ? $like : "" ?></p>
+                </button>
+
+            </form> #}
+
+
+
+        </article>
+
+        <div class="messTitle">
+            <h1>Messages</h1>
+            <a href="" class="fa-solid fa-plus"></a>
+        </div>
+
+        {% if topic.messages %}
+            
+            {% for message in topic.messages %}
+                
+                <div class="messages">
+
+                    <div class="authorInfo">
+
+                        <a href="">
+                            <p>{{message.user.username}}</p>
+                        </a>
+
+                        <p>{{message.createdAt |date("m/d/Y")}}</p>
+
+                    </div>
+
+                    <p>{{message.text}}</p>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+            <h3>there no messages for this topic</h3>
+        {% endif %}
+
+    </section>
+
+{% else %}
+    <h3>The topic has successfuly been deleted</h3>
+{% endif %}
+
+{% endblock %}

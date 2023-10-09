@@ -36,7 +36,7 @@
 
                 <p>{{ topic.createdAt |date("m/d/Y") }} </p>
 
-                <a href="">
+                <a href="{{path('detail_topic', {'id': topic.id})}}">
 
                     <p>{{ topic.title }} </p>
                 </a>
