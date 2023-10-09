@@ -4,13 +4,47 @@
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{# TODO: add search bar #}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/leade/Documents/forumSf/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/leade/Documents/forumSf/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% if topics %}
+    
+    {{ dump(topics) }}
+
+    <section class="posts">
+
+        {% for topic in topics %}
+            
+            <article>
+                <div class="authorInfo">
+                    <figure>
+                        <img src="" alt="avatar">
+
+                    </figure>
+
+                    <a href="">
+                        <p>{{topic.user.username}}</p>
+
+                    </a>
+                </div>
+
+                <p>{{ topic.createdAt |date("m/d/Y")}} </p>
+
+                <a href="">
+
+                    <p>{{ topic.title}} </p>
+                </a>
+
+
+            </article>
+        {% endfor %}
+
+    </section>
+
+    {% else %}
+
+        <h3>Sorry there is no topic with this name.</h3>
+
+{% endif %}
+
+
 {% endblock %}
