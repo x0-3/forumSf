@@ -34,9 +34,13 @@ class Topic
     #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
     private Collection $messages;
 
+    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Like::class)]
+    private Collection $likes;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -128,6 +132,36 @@ class Topic
             // set the owning side to null (unless already changed)
             if ($message->getTopic() === $this) {
                 $message->setTopic(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): static
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setTopic($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): static
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getTopic() === $this) {
+                $like->setTopic(null);
             }
         }
 
