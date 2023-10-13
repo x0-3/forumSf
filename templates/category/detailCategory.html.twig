@@ -6,13 +6,6 @@
 
 <section class="topic">
 
-    {# TODO: searchbar #}
-    {# <form action="index.php?ctrl=home&action=searchBar" method="post" class="searchBar">
-        <input type="search" name="search" id="search" placeholder="Search a topic ..." autocomplete="on">
-
-        <input type="submit" id="submitButton" name="submit" value="&#x1F50E;&#xFE0E;">
-    </form> #}
-
     <div class="categoryName">
         <h1>{{category.name}}</h1>
         <a href="{{path('new_topic', {'id': category.id})}}" class="fa-solid fa-plus"></a>
