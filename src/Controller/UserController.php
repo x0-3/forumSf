@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Topic;
 use App\Entity\User;
+use App\Entity\Topic;
+use App\Form\EditUserType;
+use App\Service\FileUpload;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,6 +44,43 @@ class UserController extends AbstractController
                 'description' => $user->getUsername() . 'profile page'
             ]);
         }
+
+    }
+
+
+    #[Route('/editProfile', name: 'edit_profile')]
+    public function editProfile(Request $request, EntityManagerInterface $em, FileUpload $fileUploader): Response
+    {
+
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->redirectToRoute('app_home');
+        }
+
+        $form = $this->createForm(EditUserType::class, $user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            $imageFile = $form->get('avatar')->getData();
+            if ($imageFile) {
+                $imageFileName = $fileUploader->upload($imageFile);
+                $user->setAvatar($imageFileName);
+            }
+
+
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('app_profile');
+        }
+
+        return $this->render('user/editUser.html.twig', [
+            'form' => $form,
+            'description' => 'create a new message',
+        ]);
 
     }
 
