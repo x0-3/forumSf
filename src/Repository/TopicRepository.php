@@ -21,6 +21,23 @@ class TopicRepository extends ServiceEntityRepository
         parent::__construct($registry, Topic::class);
     }
 
+   /**
+    * @return Topic[] Returns an array of Topic objects
+    */
+   public function findByUser($user, $limit): array
+   {
+
+    return $this->createQueryBuilder('t')
+                ->join('t.user', 'u')
+                ->andWhere('u.id = :userId')
+                ->setParameter('userId', $user)
+                ->orderBy('t.createdAt', 'DESC')
+                ->setMaxResults($limit)
+                ->getQuery()
+                ->getResult()
+    ;
+
+   }
 //    /**
 //     * @return Topic[] Returns an array of Topic objects
 //     */

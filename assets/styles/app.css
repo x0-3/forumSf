@@ -343,6 +343,7 @@
 * body main .profilIntro figure {
   display: flex;
   align-items: center;
+  width: 50%;
 }
 * body main .profilIntro figure img {
   border-radius: 100%;
