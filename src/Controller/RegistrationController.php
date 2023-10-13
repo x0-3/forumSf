@@ -48,7 +48,6 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            /** @var UploadedFile $brochureFile */
             $imageFile = $form->get('avatar')->getData();
             if ($imageFile) {
                 $imageFileName = $fileUploader->upload($imageFile);
