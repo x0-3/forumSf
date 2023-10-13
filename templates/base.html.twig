@@ -52,7 +52,14 @@
                             <li>
                                 <a href="{{path('app_profile')}}">
                                     <figure>
-                                        <img src="{{ asset('uploads/' ~ app.user.avatar) }}" alt="{{ app.user.username }} account avatar">
+                                        {% if app.user.avatar %}
+                                            
+                                            <img src="{{ asset('uploads/' ~ app.user.avatar) }}" alt="{{ app.user.username }} account avatar">
+                                            
+                                        {% else %}
+                                            
+                                            <img src="{{ asset('img/defaultProfilePicture.jpg') }}" alt="{{ app.user.username }} account avatar">
+                                        {% endif %}
         
                                     </figure>
                                 </a>

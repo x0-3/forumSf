@@ -29,7 +29,7 @@
                     {% endif %}
                     
 
-                    <a href="">
+                    <a href="{{path('app_user', {'id': topic.user.id})}}">
                         <p>{{ topic.user.username}}</p>
                     </a>
 
@@ -79,7 +79,7 @@
 
                     <div class="authorInfo">
 
-                        <a href="">
+                        <a href="{{path('app_user', {'id': message.user.id})}}">
                             <p>{{message.user.username}}</p>
                         </a>
 

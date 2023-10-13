@@ -25,7 +25,6 @@
 {% if app.user.topics %}
     
     {% for topic in topics %}
-        {{ dump(topic) }}
     
         <section class="posts">
             
@@ -44,7 +43,7 @@
                         
                     </figure>
 
-                    <a href="">
+                    <a href="{{path('app_user', {'id': topic.user.id})}}">
                         <p>{{topic.user.username}} </p>
                         
                     </a>
@@ -57,7 +56,7 @@
                 </a>
 
 
-                </article>
+            </article>
 
         </section>
     
