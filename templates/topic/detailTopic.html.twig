@@ -35,9 +35,14 @@
 
                 </div>
 
-                <a href="">
-                    <i class="fa-solid fa-trash" style="color: #b20101;"></i>
-                </a>
+                {% if app.user == topic.user %}
+                    
+                    <a href="{{path('delete_topic', {'categoryId': topic.category.id, 'id': topic.id})}}">
+                        <i class="fa-solid fa-trash" style="color: #b20101;"></i>
+                    </a>
+
+                    <a href="{{path('edit_topic', {'categoryId': topic.category.id, 'id': topic.id})}}"><i class="fa-solid fa-gear"></i></a>
+                {% endif %}
 
                 {# TODO: Lock functionnality #}
                 {# <form action="" method="post" class="lock">
@@ -83,7 +88,7 @@
                             <p>{{message.user.username}}</p>
                         </a>
 
-                        <p>{{message.createdAt |date("m/d/Y")}}</p>
+                        <p>{{message.createdAt |date("d/m/Y")}}</p>
 
                     </div>
 

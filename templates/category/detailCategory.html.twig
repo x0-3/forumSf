@@ -15,7 +15,7 @@
 
     <div class="categoryName">
         <h1>{{category.name}}</h1>
-        <a href="{{path('detail_category', {'id': category.id})}}" class="fa-solid fa-plus"></a>
+        <a href="{{path('new_topic', {'id': category.id})}}" class="fa-solid fa-plus"></a>
     </div>
     
 
@@ -48,7 +48,7 @@
                         </a>
                     </div>
             
-                    <p>{{topic.createdAt |date("m/d/Y")}}</p>
+                    <p>{{topic.createdAt |date("d/m/Y")}}</p>
             
                     <a href="{{path('detail_topic', {'id': topic.id})}}">
                         <p>{{topic.title}}</p>
