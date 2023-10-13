@@ -26,9 +26,11 @@ class Topic
     private ?bool $islocked = null;
 
     #[ORM\ManyToOne(inversedBy: 'topics')]
+    #[ORM\JoinColumn(name:"category_id", referencedColumnName:"id", nullable: false)]
     private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'topics')]
+    #[ORM\JoinColumn(name:"user_id", referencedColumnName:"id", nullable: false)]
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]

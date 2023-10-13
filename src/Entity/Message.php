@@ -21,9 +21,11 @@ class Message
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[ORM\JoinColumn(name:"user_id", referencedColumnName:"id", nullable: false)]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[ORM\JoinColumn(name:"topic_id", referencedColumnName:"id", nullable: false, onDelete:"CASCADE")]
     private ?Topic $topic = null;
 
     public function getId(): ?int
