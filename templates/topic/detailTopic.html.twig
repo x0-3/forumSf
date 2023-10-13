@@ -73,7 +73,7 @@
 
         <div class="messTitle">
             <h1>Messages</h1>
-            <a href="" class="fa-solid fa-plus"></a>
+            <a href="{{path('new_message', {'topicId': topic.id})}}" class="fa-solid fa-plus"></a>
         </div>
 
         {% if topic.messages %}
