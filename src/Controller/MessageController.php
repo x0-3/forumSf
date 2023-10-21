@@ -21,6 +21,7 @@ class MessageController extends AbstractController
         ]);
     }
 
+
     #[Route('/{topicId}/newMessage', name: 'new_message')]
     public function newMessage(Request $request, EntityManagerInterface $em, Topic $topicId): Response
     {
@@ -28,6 +29,13 @@ class MessageController extends AbstractController
         $user = $this->getUser();
 
         if (!$user) {
+            return $this->redirectToRoute('detail_topic', ['id' => $topicId->getId()]);
+        }
+
+        // if the topic is locked block the messages form submission
+        if ($topicId->isIslocked() == true) {
+
+            // then redirect to the topic
             return $this->redirectToRoute('detail_topic', ['id' => $topicId->getId()]);
         }
 

@@ -44,11 +44,6 @@
                     <a href="{{path('edit_topic', {'categoryId': topic.category.id, 'id': topic.id})}}"><i class="fa-solid fa-gear"></i></a>
                 {% endif %}
 
-                {# TODO: Lock functionnality via panel admin #}
-                {# <form action="" method="post" class="lock">
-                    
-                    <button type="submit">{{topic.islocked}}</button>        
-                </form> #}
             </div>
 
             <p>{{topic.createdAt |date("m/d/Y")}}</p>
@@ -66,8 +61,14 @@
 
         <div class="messTitle">
             <h1>Messages</h1>
-            <a href="{{path('new_message', {'topicId': topic.id})}}" class="fa-solid fa-plus"></a>
+
+            {% if topic.islocked == false %}
+
+                <a href="{{path('new_message', {'topicId': topic.id})}}" class="fa-solid fa-plus"></a>
+            {% endif %}
+
         </div>
+
 
         {% if topic.messages %}
             
