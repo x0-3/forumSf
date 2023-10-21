@@ -229,7 +229,7 @@
                 flex-direction: row;
                 align-items: center;
 
-                input#submitButton {
+                .submit {
                     border-radius: 0 10px 10px 0;
                     height: 44px;
                     margin-top: 0;
@@ -243,7 +243,7 @@
                     }
                 }
 
-                input[type= "search" i]{
+                input[type= "text" i]{
                     width: 84%;
                     padding: 12px;
                     border-radius: 10px 0 0 10px;

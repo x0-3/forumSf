@@ -179,7 +179,7 @@
   flex-direction: row;
   align-items: center;
 }
-* body main .searchBar input#submitButton {
+* body main .searchBar .submit {
   border-radius: 0 10px 10px 0;
   height: 44px;
   margin-top: 0;
@@ -188,10 +188,10 @@
   color: white;
   background-color: #363979;
 }
-* body main .searchBar input#submitButton:hover {
+* body main .searchBar .submit:hover {
   background-color: #1E1637;
 }
-* body main .searchBar input[type=search i] {
+* body main .searchBar input[type=text i] {
   width: 84%;
   padding: 12px;
   border-radius: 10px 0 0 10px;

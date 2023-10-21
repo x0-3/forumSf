@@ -4,12 +4,12 @@
 
 {% block body %}
 
-{# =search bar #}
+{# search bar #}
 
-{{form_start(form)}}
+{{form_start(form, {'attr': {'class': 'searchBar'}})}}
 
     {{form_widget(form.q)}}
-    {{form_row(form.submit)}}
+    {{form_row(form.submit, {'attr': {'class': 'submit'}})}}
 
 {{form_end(form)}}
 
