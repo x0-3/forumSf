@@ -1,0 +1,18 @@
+<div class="likeForm">
+
+	{% if app.user %}
+		<a class="likeLink" href="{{ path('app_like', {id: topic.id}) }}" data-action="like" data-nb={{ topic.likes|length }}>
+		{% endif %}
+	
+			<i class="fa-solid fa-thumbs-up {{ app.user in topic.likes ? '' : 'd-none' }}"></i>
+			
+			<i class="fa-regular fa-thumbs-up {{ app.user in topic.likes ? 'd-none' : '' }}"></i>
+	
+
+		<span class="ml-2">{{ topic.likes|length }}
+			Like</span>
+		{% if app.user %}
+		</a>
+	{% endif %}
+</div>
+

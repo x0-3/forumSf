@@ -51,7 +51,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Like::class)]
+    #[ORM\ManyToMany(targetEntity: Topic::class, inversedBy: 'likes')]
     private Collection $likes;
 
     public function __construct()
@@ -240,32 +240,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Like>
+     * @return Collection<int, Topic>
      */
     public function getLikes(): Collection
     {
         return $this->likes;
     }
 
-    public function addLike(Like $like): static
+    public function addLike(Topic $like): static
     {
         if (!$this->likes->contains($like)) {
             $this->likes->add($like);
-            $like->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeLike(Like $like): static
+    public function removeLike(Topic $like): static
     {
-        if ($this->likes->removeElement($like)) {
-            // set the owning side to null (unless already changed)
-            if ($like->getUser() === $this) {
-                $like->setUser(null);
-            }
-        }
+        $this->likes->removeElement($like);
 
         return $this;
     }
+
 }

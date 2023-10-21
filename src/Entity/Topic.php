@@ -36,7 +36,7 @@ class Topic
     #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
     private Collection $messages;
 
-    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Like::class)]
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'likes')]
     private Collection $likes;
 
     public function __construct()
@@ -141,32 +141,41 @@ class Topic
     }
 
     /**
-     * @return Collection<int, Like>
+     * @return Collection<int, User>
      */
     public function getLikes(): Collection
     {
         return $this->likes;
     }
 
-    public function addLike(Like $like): static
+    public function addLike(User $like): static
     {
         if (!$this->likes->contains($like)) {
             $this->likes->add($like);
-            $like->setTopic($this);
+            $like->addLike($this);
         }
 
         return $this;
     }
 
-    public function removeLike(Like $like): static
+    public function removeLike(User $like): static
     {
         if ($this->likes->removeElement($like)) {
-            // set the owning side to null (unless already changed)
-            if ($like->getTopic() === $this) {
-                $like->setTopic(null);
-            }
+            $like->removeLike($this);
         }
 
         return $this;
+    }
+
+    public function isLikedByUser(User $user): bool
+    {
+
+        return $this->likes->contains($user);
+    }
+    
+    public function howManyLikes(): int
+    {
+
+        return count($this->likes);
     }
 }

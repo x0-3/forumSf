@@ -326,10 +326,10 @@
                         font-weight: bold;
                     }
 
-                    form{
+                    .likeForm {
                         justify-content: flex-start;
                         
-                        button#submit {
+                        a.likeLink {
                             padding: 6px;
                             border-radius: 5px;
                             border: none;

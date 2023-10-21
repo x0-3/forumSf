@@ -256,10 +256,10 @@
   color: black;
   font-weight: bold;
 }
-* body main .posts article form {
+* body main .posts article .likeForm {
   justify-content: flex-start;
 }
-* body main .posts article form button#submit {
+* body main .posts article .likeForm a.likeLink {
   padding: 6px;
   border-radius: 5px;
   border: none;
@@ -269,11 +269,11 @@
   align-items: center;
   justify-content: center;
 }
-* body main .posts article form button#submit i.fa-regular.fa-thumbs-up {
+* body main .posts article .likeForm a.likeLink i.fa-regular.fa-thumbs-up {
   margin-right: 7px;
   font-size: large;
 }
-* body main .posts article form button#submit:hover {
+* body main .posts article .likeForm a.likeLink:hover {
   color: white;
   background-color: #1E1637;
 }

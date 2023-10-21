@@ -44,7 +44,7 @@
                     <a href="{{path('edit_topic', {'categoryId': topic.category.id, 'id': topic.id})}}"><i class="fa-solid fa-gear"></i></a>
                 {% endif %}
 
-                {# TODO: Lock functionnality #}
+                {# TODO: Lock functionnality via panel admin #}
                 {# <form action="" method="post" class="lock">
                     
                     <button type="submit">{{topic.islocked}}</button>        
@@ -57,15 +57,8 @@
                 <p>{{topic.title}}</p>
             </a>
 
-            {# TODO: Like functionnality #}
-            {# <form action="index.php?ctrl=forum&action=like&id=<?= $topic->getId() ?>" method="post">
 
-                <button id="submit" type="submit">
-                    <i class="fa-regular fa-thumbs-up"></i>
-                    <p><?= $like ? $like : "" ?></p>
-                </button>
-
-            </form> #}
+            {% include "like/_likeTemplate.html.twig" %}
 
 
 
