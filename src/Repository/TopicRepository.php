@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Topic;
+use App\Model\Searchbar;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -38,6 +39,22 @@ class TopicRepository extends ServiceEntityRepository
     ;
 
    }
+
+   /**
+    * @return Topic[] Returns an array of Topic objects
+    */
+   public function findBySearch(Searchbar $searchbar, $limit): array
+   {
+       return $this->createQueryBuilder('t')
+           ->andWhere('t.title LIKE :q')
+           ->setParameter('q', "%{$searchbar->q}%")
+           ->orderBy('t.createdAt', 'DESC')
+           ->setMaxResults($limit)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
 //    /**
 //     * @return Topic[] Returns an array of Topic objects
 //     */
