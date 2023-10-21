@@ -178,4 +178,9 @@ class Topic
 
         return count($this->likes);
     }
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 }
