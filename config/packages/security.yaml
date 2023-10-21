@@ -10,13 +10,13 @@ security:
                 class: App\Entity\User
                 property: email
     firewalls:
-        default:
-            # by default, the feature allows 5 login attempts per minute
-            login_throttling: ~
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            login_throttling:
+                max_attempts: 5
+                
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\AppCustomAuthenticator
