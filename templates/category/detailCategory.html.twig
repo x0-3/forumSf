@@ -14,7 +14,7 @@
 
     {% if category.topics %}
         
-        {% for topic in category.topics %}
+        {% for topic in category.topics |sort|reverse %}
             
             <div class="posts">
                 

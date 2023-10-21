@@ -26,8 +26,6 @@ class CategoryController extends AbstractController
     public function detailCategory(Category $category): Response
     {
 
-        // dd($category);
-
         return $this->render('category/detailCategory.html.twig', [
             'category' => $category,
             'description' => 'CategoryController',

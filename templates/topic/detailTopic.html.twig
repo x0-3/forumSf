@@ -71,7 +71,7 @@
 
         {% if topic.messages %}
             
-            {% for message in topic.messages %}
+            {% for message in topic.messages |sort|reverse %}
                 
                 <div class="messages">
 

@@ -18,7 +18,7 @@
     </div>
 
 
-    {% for topic in topics %}
+    {% for topic in user.topics |sort|reverse %}
             
         <section class="posts">
             

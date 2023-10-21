@@ -23,7 +23,7 @@
 
 {% if app.user.topics %}
     
-    {% for topic in topics %}
+    {% for topic in app.user.topics |sort|reverse %}
     
         <section class="posts">
             

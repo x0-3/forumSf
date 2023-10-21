@@ -37,10 +37,10 @@ class UserController extends AbstractController
             }
 
             // find the topics created by the user that is logged in
-            $topics = $em->getRepository(Topic::class)->findByUser($user->getId(), 5);
+            // $topics = $em->getRepository(Topic::class)->findByUser($user->getId(), 5);
         
             return $this->render('user/profile.html.twig', [
-                'topics' => $topics,
+                // 'topics' => $topics,
                 'description' => $user->getUsername() . 'profile page'
             ]);
         }
@@ -97,11 +97,11 @@ class UserController extends AbstractController
         }
 
         // find the topics created by the user that is logged in
-        $topics = $em->getRepository(Topic::class)->findByUser($user->getId(), 5);
+        // $topics = $em->getRepository(Topic::class)->findByUser($user->getId(), 5);
 
         return $this->render('user/detailUser.html.twig', [
             'user' => $user,
-            'topics' => $topics,
+            // 'topics' => $topics,
             'description' => $user->getUsername() . 'page'
         ]);
 
