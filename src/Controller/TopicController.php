@@ -118,6 +118,61 @@ class TopicController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
+
+    // lock a topic 
+    #[Route('/lockTopic/{id}', name: 'lock_topic')]
+    public function lockTopic(Topic $id, EntityManagerInterface $em): Response
+    {
+
+        $user = $this->getUser();
+
+        // get the owner of the topic
+        $topicOwner = $id->getUser();
+
+        // dd($user);
+
+        // if the user is the owner of the topic
+        if ($user === $topicOwner) {
+            
+            // then switch lock topic to true
+            $id->setIslocked(true);
+
+            $em->persist($id);
+            $em->flush();
+
+            return $this->redirectToRoute('detail_topic', ['id'=>$id->getId()]);
+        }
+
+        return $this->redirectToRoute('detail_topic', ['id'=>$id->getId()]);
+    }
+    
+
+    // unlock a topic 
+    #[Route('/unlockTopic/{id}', name: 'unlock_topic')]
+    public function unlockTopic(Topic $id, EntityManagerInterface $em): Response
+    {
+
+        $user = $this->getUser();
+
+        // get the owner of the topic
+        $topicOwner = $id->getUser();
+
+        // if the user is the owner of the topic 
+        if ($user === $topicOwner) {
+            
+            // then switch lock topic to true
+            $id->setIslocked(false);
+
+            $em->persist($id);
+            $em->flush();
+
+            return $this->redirectToRoute('detail_topic', ['id'=>$id->getId()]);
+        }
+
+        return $this->redirectToRoute('detail_topic', ['id'=>$id->getId()]);
+    }
+
+
     #[Route('/topic/{id}', name: 'detail_topic')]
     public function detailTopic(Topic $topic): Response
     {
