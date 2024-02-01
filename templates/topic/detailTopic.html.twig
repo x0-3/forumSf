@@ -75,7 +75,6 @@
         
                 <div class="messages">
             
-                    {# todo: edit and delete messages #}
                     {% if app.user == message.user %}
                         
                         <a href="{{path('delete_message', {'topicId': message.topic.id, 'id': message.id})}}">
