@@ -69,12 +69,21 @@
 
         </div>
 
-        {# todo: edit and delete messages #}
         {% if topic.messages %}
-            
+        
             {% for message in topic.messages |sort|reverse %}
-                
+        
                 <div class="messages">
+            
+                    {# todo: edit and delete messages #}
+                    {% if app.user == message.user %}
+                        
+                        <a href="{{path('delete_message', {'topicId': message.topic.id, 'id': message.id})}}">
+                            <i class="fa-solid fa-trash" style="color: #b20101;"></i>
+                        </a>
+
+                        <a href="{{path('edit_message', {'topicId': message.topic.id, 'id': message.id})}}"><i class="fa-solid fa-gear"></i></a>
+                    {% endif %}
 
                     <div class="authorInfo">
 

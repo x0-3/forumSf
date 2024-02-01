@@ -21,7 +21,6 @@ class MessageController extends AbstractController
         ]);
     }
 
-
     #[Route('/{topicId}/newMessage', name: 'new_message')]
     public function newMessage(Request $request, EntityManagerInterface $em, Topic $topicId): Response
     {
@@ -63,5 +62,55 @@ class MessageController extends AbstractController
             'description' => 'create a new message',
         ]);
 
+    }
+
+
+    #[Route('{topicId}/message/edit/{id}', name: 'edit_message')]
+    public function editMessage(EntityManagerInterface $em, Topic $topicId, Message $id, Request $request): Response
+    {
+
+        $user = $this->getUser();
+        $messageOwner = $id->getUser(); // get the message owner
+
+        if ($user === $messageOwner) {
+
+            $form = $this->createForm(MessageType::class, $id);
+    
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $id = $form->getData();
+    
+                $id->setCreatedAt(new \DateTime());
+                $id->setUser($user);
+                $id->setTopic($topicId);
+    
+                $em->persist($id);
+    
+                $em->flush();
+    
+                return $this->redirectToRoute('detail_topic', ['id' => $topicId->getId()]);
+            }
+    
+            return $this->render('message/newMessage.html.twig', [
+                'form' => $form,
+                'description' => 'create a new message',
+            ]);
+
+        }
+    }
+
+
+    #[Route('{topicId}/message/delete/{id}', name: 'delete_message')]
+    public function deleteMessage(EntityManagerInterface $em, Topic $topicId, Message $id): Response
+    {
+        $user = $this->getUser();
+        $messageOwner = $id->getUser();
+
+        if ($user === $messageOwner) {
+            $em->remove($id);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('detail_topic', ['id' => $topicId->getId()]);
     }
 }
